@@ -34,7 +34,7 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     min-height: 100vh;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Arial;
 }
 
 .students {
@@ -89,6 +89,10 @@ table td {
     padding: 10px 15px;
 }
 
+table tr.active {
+    border: 2px solid var(--norm);
+    font-weight: bold;
+}
 
 @media (max-width:768px) {
     table {
@@ -104,10 +108,10 @@ table td {
 
 .forms {
     display: flex;
-    gap: 10px;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
     padding: 10px;
-
+    gap: 10px;
 
 }
 
@@ -121,6 +125,9 @@ table td {
     border: 1px solid var(--light-gradiant);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.134);
     margin-top: 33px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 }
 
@@ -135,7 +142,8 @@ table td {
 
 .forms form .description {
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 
@@ -144,10 +152,21 @@ table td {
     justify-content: space-between;
     margin-bottom: 20px;
 }
+.forms form .row.center{
+    justify-content: space-around;
+}
+.forms form .row.right{
+    justify-content: flex-end;
+}
+
+.forms form .row:last-child {
+    margin-bottom: 0;
+}
 
 @media (max-width:768px) {
     .forms {
         flex-direction: column;
+        align-items: center;
         gap: 20px;
     }
 }
@@ -155,6 +174,7 @@ table td {
 .hint,
 .result {
     padding: 6px 10px;
+    font-size: 16px;
 }
 
 .result {
@@ -162,11 +182,7 @@ table td {
     text-align: center;
     width: 130px;
     max-width: 50%;
-    font-size: 16px;
     color: var(--dark);
-
-    /* border-bottom: 1px solid var(--dark); */
-
     z-index: 1;
     padding: 6px 10px;
 }
@@ -212,7 +228,13 @@ table td {
     cursor: pointer;
     font-size: 16px;
     background-color: white;
+    transition: .3s;
 
+}
+
+.custom-select select:hover {
+    background-color: var(--dark);
+    color: white;
 }
 
 .custom-select::after {
@@ -277,3 +299,21 @@ table td {
 }
 
 /* End Button */
+/* Start Input */
+.number-input{
+    outline: none;
+    width: 130px;
+    max-width: 50%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--norm);
+    color: var(--dark);
+    background-color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+.number-input:focus::placeholder{
+    color: transparent;
+    transition: .3s;
+}

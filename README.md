@@ -23,6 +23,6 @@ Untill **Now**( the upload commit)  i've done the basic table design (html&css) 
 ![conosle image](console.png)
 
 ### Targets
-- [ ] Finish design 
+- [x] Finish design 
 - [ ] Connect the code with html design
 

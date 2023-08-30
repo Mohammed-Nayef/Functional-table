@@ -74,8 +74,8 @@
                     <td>70</td>
                     <td>70</td>
                 </tr>
-                <tr>
-                    <td>Ali</td>
+                <tr class="active">
+                    <td>active</td>
                     <td>290</td>
                     <td>19</td>
                     <td>50</td>
@@ -98,24 +98,8 @@
                     <td>70</td>
                     <td>70</td>
                 </tr>
-                <tr>
-                    <td>Ali</td>
-                    <td>290</td>
-                    <td>19</td>
-                    <td>50</td>
-                    <td>70</td>
-                    <td>70</td>
-                </tr>
-                <tr>
-                    <td>Ali</td>
-                    <td>290</td>
-                    <td>19</td>
-                    <td>50</td>
-                    <td>70</td>
-                    <td>70</td>
-                </tr>
-                <tr>
-                    <td>Ali</td>
+                <tr class="active">
+                    <td>active</td>
                     <td>290</td>
                     <td>19</td>
                     <td>50</td>
@@ -143,6 +127,30 @@
 
     </div>
     <div class="forms">
+        <!-- form 1 -->
+        <form action="" class="max-student" id="maxStudent">
+            <h4>Get Max Grade Student</h4>
+            <div class="description">
+                Select subject then click Shwo to highlight student/s who has the maximum
+                grade of some subject (highlighted in the table)
+            </div>
+            <div class="row">
+                <label for="" class="custom-select">
+                    <select id="">
+                        <option value="math">Math</option>
+                        <option value="since">Since</option>
+                        <option value="history">History</option>
+                    </select>
+                </label>
+
+                <input type="submit" class="btn" value="show">
+            </div>
+            <div class="row right">
+
+                <input type="reset" title="remove highlights" class="btn" value="Hide">
+            </div>
+        </form>
+        <!-- form 2 -->
         <form action="" class="avg-subject" id="avgSubject">
             <h4>Get Avg of a Subject</h4>
             <div class="description">
@@ -166,42 +174,27 @@
                 </span>
             </div>
         </form>
+        <!-- form 3 -->
+        <form action="" id="checkPass">
+            <h4>Check if student passes</h4>
+            <div class="description">
+                Enter student's number to check if he pass or failed
 
+            </div>
+            <div class="row">
+                <input type="number" class="number-input " placeholder="ex: 9089">
+                <input type="button" class="btn" value="Check">
 
-        <!-- <form action="" class="avg-student" id="avgStudent">
-            <h4>Get Avg of Student Marks</h4>
-            <div class="hint">
-                enter student number
             </div>
-            <input type="submit" value="Calc">
-            <input type="text" name="" id="" pattern="[0-9]">
-            <div class="result">
-                99.5
+            <div class="row right">
+                <span class="result">
+                    pass
+                </span>
             </div>
-        </form> -->
-        <!-- <form action="" class="max-student" id="maxStudent">
-            <h4>Get max mark student</h4>
-            <div class="hint">
-                select subject then click get will show you student/s information that have the maximum grade of certain subject
-            </div>
-            <input type="submit" value="get">
-            <select name="" id="">
-                <option value="math">Math</option>
-                <option value="since">Since</option>
-                <option value="history">History</option>
-            </select>
-            <div class="result">
-                <div class="row">
-                    <span>name</span>
-                    <span class="mark">subject</span>
-                </div>
-                <div class="row">
-                    <span>Ali</span>
-                    <span class="mark">30</span>
-                </div>
-            </div>
-            <input type="reset" value="reset">
-        </form> -->
+        </form>
+
+        <!-- avg for student marks /////// later here ///////// -->
+
 
     </div>
 
