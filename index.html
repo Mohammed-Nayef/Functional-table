@@ -7,6 +7,8 @@
     <title>Document</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="main.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="all.min.css">
 </head>
 
 <body>
@@ -138,16 +140,71 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div class="buttons">
-        <button> Add Student</button>
-        <button> Check Student Success</button>
-        <button> Calculate Avg Of Subject</button>
-        <button> Calculate Avg Of Student Marks</button>
-    </div>
-    <form action="" class="functions">
 
-    </form>
+    </div>
+    <div class="forms">
+        <form action="" class="avg-subject" id="avgSubject">
+            <h4>Get Avg of a Subject</h4>
+            <div class="description">
+                Select Subject then click Calc to get tha Average grade of certian subject for all students
+            </div>
+            <div class="row">
+                <label for="" class="custom-select">
+                    <select id="">
+                        <option value="math">Math</option>
+                        <option value="since">Since</option>
+                        <option value="history">History</option>
+                    </select>
+                </label>
+
+                <input type="submit" class="btn" value="Calc">
+            </div>
+            <div class="row">
+                <span class="hint">Avg :</span>
+                <span class="result">
+                    99.5
+                </span>
+            </div>
+        </form>
+
+
+        <!-- <form action="" class="avg-student" id="avgStudent">
+            <h4>Get Avg of Student Marks</h4>
+            <div class="hint">
+                enter student number
+            </div>
+            <input type="submit" value="Calc">
+            <input type="text" name="" id="" pattern="[0-9]">
+            <div class="result">
+                99.5
+            </div>
+        </form> -->
+        <!-- <form action="" class="max-student" id="maxStudent">
+            <h4>Get max mark student</h4>
+            <div class="hint">
+                select subject then click get will show you student/s information that have the maximum grade of certain subject
+            </div>
+            <input type="submit" value="get">
+            <select name="" id="">
+                <option value="math">Math</option>
+                <option value="since">Since</option>
+                <option value="history">History</option>
+            </select>
+            <div class="result">
+                <div class="row">
+                    <span>name</span>
+                    <span class="mark">subject</span>
+                </div>
+                <div class="row">
+                    <span>Ali</span>
+                    <span class="mark">30</span>
+                </div>
+            </div>
+            <input type="reset" value="reset">
+        </form> -->
+
+    </div>
+
 
     <script src="script.js"></script>
 </body>

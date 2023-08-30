@@ -12,10 +12,10 @@ body {
     --light: #fffbee;
 }
 
-.students::-webkit-scrollbar { 
+.students::-webkit-scrollbar {
     position: absolute;
     display: none;
-    top:10px
+    top: 10px
 }
 
 ::-webkit-scrollbar-thumb {
@@ -41,13 +41,14 @@ body {
     position: relative;
     max-height: 50vh;
     width: fit-content;
-    margin: 30px auto;
+    margin: 30px auto 0;
     overflow: auto;
     border-radius: 20px 20px 0 0;
     border-bottom: 1.3px solid var(--dark);
     box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.237);
 }
-.students::after{
+
+.students::after {
     content: '';
     display: block;
     position: sticky;
@@ -55,15 +56,14 @@ body {
     height: 15px;
     bottom: 0px;
     z-index: 10;
-    background-image: linear-gradient(transparent,rgba(0, 0, 0, 0.227));
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.227));
 }
 
 table {
     font-size: 17px;
     border-collapse: collapse;
     text-align: center;
-    overflow:hidden;
-   
+    overflow: hidden;
 
 }
 
@@ -75,21 +75,205 @@ table th {
 
 }
 
+table tr:nth-child(even) {
+    background-color: var(--light);
+}
+
+table tr:nth-child(odd) {
+    background-color: var(--light-gradiant);
+}
+
 table th,
 table td {
+
     padding: 10px 15px;
 }
-table tr:nth-child(even){
-    background-color:var(--light);
-}
-table tr:nth-child(odd){
-    background-color:var(--light-gradiant);
-}
+
+
 @media (max-width:768px) {
-    table{
-        font-size: 10px;
+    table {
+        font-size: 13px;
     }
-    table td, table th{
-        padding:7px 10px;
+
+    table td,
+    table th {
+        padding: 7px 5px;
+    }
+
+}
+
+.forms {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 10px;
+
+
+}
+
+.forms form {
+    background-color: var(--light);
+    flex-basis: 30%;
+    max-width: 350px;
+    padding: 20px;
+    position: relative;
+    border-radius: 17px;
+    border: 1px solid var(--light-gradiant);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.134);
+    margin-top: 33px;
+
+}
+
+.forms form h4 {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    z-index: 1;
+    font-size: 20px;
+}
+
+.forms form .description {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+
+.forms form .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+@media (max-width:768px) {
+    .forms {
+        flex-direction: column;
+        gap: 20px;
     }
 }
+
+.hint,
+.result {
+    padding: 6px 10px;
+}
+
+.result {
+    position: relative;
+    text-align: center;
+    width: 130px;
+    max-width: 50%;
+    font-size: 16px;
+    color: var(--dark);
+
+    /* border-bottom: 1px solid var(--dark); */
+
+    z-index: 1;
+    padding: 6px 10px;
+}
+
+.result::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    background-image: linear-gradient(90deg, var(--light), var(--norm), var(--light));
+    z-index: -1
+}
+
+.result::after {
+    content: '\f148';
+    position: absolute;
+    font-family: 'font awesome 6 free';
+    font-weight: 900;
+    top: 50%;
+    transform: translateY(-30%) rotate(90deg);
+    left: 5px;
+    color: var(--dark-1);
+}
+
+/*  component styling */
+/* Start Select */
+.custom-select {
+    position: relative;
+}
+
+.custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 130px;
+    outline: none;
+    padding: 6px 10px;
+    border: 1px solid var(--norm);
+    color: var(--dark);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: white;
+
+}
+
+.custom-select::after {
+    content: '\f0d7';
+    font-family: 'font awesome 6 free';
+    font-weight: bold;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    /* to allow clicking thorgh it to the select */
+    pointer-events: none;
+    color: var(--dark);
+}
+
+.custom-select ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    overflow: hidden;
+    border: 1px solid var(--norm);
+}
+
+.custom-select ul li {
+    padding: 8px;
+    cursor: pointer;
+    background-color: white;
+    color: var(--dark);
+    transition: .3s;
+}
+
+.custom-select ul li:hover {
+    padding-left: 12px;
+    background-color: var(--dark);
+    color: white;
+}
+
+/* End Select */
+/* Start Button */
+.btn {
+    width: 130px;
+    max-width: 50%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--norm);
+    color: var(--dark);
+    background-color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover {
+    background-color: var(--dark);
+    color: white;
+}
+
+/* End Button */

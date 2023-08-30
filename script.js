@@ -14,6 +14,46 @@ class student {
 
 }
 
+// costum select 
+const slctparents = document.querySelectorAll('.custom-select');
+
+[...slctparents].forEach(label => {
+  label.addEventListener('mousedown', (e) => {
+    // hide original dropdown list 
+    e.preventDefault()
+    if (e.target.hasAttribute('on')) return
+
+    const select = label.children[0];
+    const ul = document.createElement('ul');
+    ul.classList.add('dropdown-list');
+
+    [...select.children].forEach((option) => {
+
+      const li = document.createElement('li')
+      li.textContent = option.textContent
+
+      li.addEventListener('mousedown', e => {
+
+        e.stopPropagation()
+        select.value = option.value
+        // trigger change event on the select
+        select.dispatchEvent(new Event('change'))
+        ul.remove()
+      })
+
+      ul.appendChild(li)
+
+    })
+    label.appendChild(ul)
+    // click out handle
+    document.addEventListener('click',e=>{
+      if(!label.contains(e.target)) ul.remove()
+    })
+
+  })
+});
+
+
 function insertStudent(name = '', number = 0, age, math = 0, since = 0, history = 0) {
   //  vlaidation 
   if (typeof name !== typeof '') {
