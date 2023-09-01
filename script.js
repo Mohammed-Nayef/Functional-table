@@ -1,4 +1,4 @@
-
+const table=document.querySelector('table')
 
 let students = []
 
@@ -14,7 +14,7 @@ class student {
 
 }
 
-// costum select 
+// custom select 
 const slctparents = document.querySelectorAll('.custom-select');
 
 [...slctparents].forEach(label => {
@@ -46,12 +46,50 @@ const slctparents = document.querySelectorAll('.custom-select');
     })
     label.appendChild(ul)
     // click out handle
-    document.addEventListener('click',e=>{
-      if(!label.contains(e.target)) ul.remove()
+    document.addEventListener('click', e => {
+      if (!label.contains(e.target)) ul.remove()
     })
 
   })
 });
+// end custom select
+//start popup
+const popup = document.querySelector('.popup')
+const openPopupBtn = document.querySelector('.open-popup')
+const closePopupBtn = document.querySelector('.close-popup')
+const insertStudentForm = document.getElementById('insert-student')
+
+popup.remove()
+
+openPopupBtn.addEventListener('click', (e) => {
+  e.stopPropagation()
+  popup.classList.remove('hide')
+  document.body.append(popup)
+
+  document.querySelector('.popup .row input').focus()
+
+  document.addEventListener('click', (e) => {
+    if (!insertStudentForm.contains(e.target)) {
+      popup.classList.add('hide')
+      popup.remove()
+      insertStudentForm.querySelectorAll('.custom-input').forEach((input) => input.value = '')
+    }
+  })
+})
+closePopupBtn.addEventListener('click', (e) => {
+  insertStudentForm.querySelectorAll('.custom-input').forEach((input) => input.value = '')
+  popup.classList.add('hide')
+  popup.remove()
+})
+insertStudentForm.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const [name , number , age ,math,since ,history] = [...document.querySelectorAll('.popup .row input')]
+  // edit insertStudent() to add dirictly to table 
+  insertStudent(name.value,+number.value,+age.value,+math.value,+since.value,+history.value)
+  popup.remove()
+})
+
+// End Popup 
 
 
 function insertStudent(name = '', number = 0, age, math = 0, since = 0, history = 0) {
@@ -102,6 +140,7 @@ function insertStudent(name = '', number = 0, age, math = 0, since = 0, history 
   // let index3=students.findIndex((el)=>el.name>name)
 
   students = students.slice(0, index2).concat(new student(name, number, age, math, since, history), students.slice(index2))
+
 }
 
 function calcAvg(subject = '') {
@@ -153,28 +192,28 @@ function checkRange(start = 0, end = 0, num) {
   if (num >= start && num <= end) return true
   return false
 }
-insertStudent('ahmed', 1, 19, 59, 50, 50)
-insertStudent('zyaD', 3, 24, 49, 82, 80)
-insertStudent('bAkr', 2, 22, 59, 60, 61)
-insertStudent('othman', 5, 28, 89, 50, 80)
-insertStudent('BeLal', 4, 25, 56, 50, 57)
-insertStudent('Ameer', 6, 21, 76, 40, 90)
-insertStudent('ameR', 20, 21, 65, 74, 62)
-insertStudent('Yazeed', 19, 19, 59, 82, 70)
-console.table(students)
-calcAvg('MatH')
-calcAvg('history')
-calcAvg('sincE')
-calcMax('since')
-calcMax('math')
-calcMax('history')
-checkSuccess(19)
-checkSuccess(3)
-// validation tests
-insertStudent(29, 2, 29, 60, 60, 60)
-insertStudent('test', 2, 20, 60, 60, 60)
-insertStudent('test', 11, 9, 60, 60, 60)
-insertStudent('test2', 12, 20, 60, 60, 200)
-calcAvg(' not a subject name')
-calcMax('any')
-checkSuccess(29)
+// insertStudent('ahmed', 1, 19, 59, 50, 50)
+// insertStudent('zyaD', 3, 24, 49, 82, 80)
+// insertStudent('bAkr', 2, 22, 59, 60, 61)
+// insertStudent('othman', 5, 28, 89, 50, 80)
+// insertStudent('BeLal', 4, 25, 56, 50, 57)
+// insertStudent('Ameer', 6, 21, 76, 40, 90)
+// insertStudent('ameR', 20, 21, 65, 74, 62)
+// insertStudent('Yazeed', 19, 19, 59, 82, 70)
+// console.table(students)
+// calcAvg('MatH')
+// calcAvg('history')
+// calcAvg('sincE')
+// calcMax('since')
+// calcMax('math')
+// calcMax('history')
+// checkSuccess(19)
+// checkSuccess(3)
+// // validation tests
+// insertStudent(29, 2, 29, 60, 60, 60)
+// insertStudent('test', 2, 20, 60, 60, 60)
+// insertStudent('test', 11, 9, 60, 60, 60)
+// insertStudent('test2', 12, 20, 60, 60, 200)
+// calcAvg(' not a subject name')
+// calcMax('any')
+// checkSuccess(29)

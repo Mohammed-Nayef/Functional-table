@@ -1,10 +1,4 @@
-body {
-    margin: 0;
-
-}
-
-* {
-    box-sizing: border-box;
+:root {
     --dark: #021c33;
     --dark-1: #163460;
     --norm: #32558c;
@@ -12,12 +6,11 @@ body {
     --light: #fffbee;
 }
 
-.students::-webkit-scrollbar {
-    position: absolute;
-    display: none;
-    top: 10px
+* {
+    box-sizing: border-box;
 }
 
+/* Start Global Ruls */
 ::-webkit-scrollbar-thumb {
     background: #32558c;
     border-radius: 0;
@@ -30,6 +23,7 @@ body {
 
 
 body {
+    margin: 0;
     background-image: linear-gradient(150deg, var(--light), var(--light-gradiant));
     background-repeat: no-repeat;
     background-size: contain;
@@ -37,18 +31,144 @@ body {
     font-family: Arial;
 }
 
-.students {
+/* End Global Ruls */
+
+/*  component styling */
+/* Start Select */
+.custom-select {
     position: relative;
-    max-height: 50vh;
+}
+
+.custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    color: var(--dark);
+    width: 130px;
+    padding: 6px 10px;
+    outline: none;
+    border: 1px solid var(--norm);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+
+}
+
+.custom-select select:hover {
+    background-color: var(--dark);
+    color: white;
+}
+
+.custom-select::after {
+    content: '\f0d7';
+    font-family: 'font awesome 6 free';
+    font-weight: bold;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    /* to allow clicking thorgh it to the select */
+    pointer-events: none;
+    color: var(--dark);
+}
+
+.custom-select ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    overflow: hidden;
+    border: 1px solid var(--norm);
+}
+
+.custom-select ul li {
+    background-color: white;
+    color: var(--dark);
+    padding: 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.custom-select ul li:hover {
+    background-color: var(--dark);
+    color: white;
+    padding-left: 12px;
+}
+
+/* End Select */
+/* Start Button */
+.btn {
+    width: 130px;
+    max-width: 50%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 1px solid var(--norm);
+    border-radius: 8px;
+    color: var(--dark);
+    background-color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover {
+    background-color: var(--dark);
+    color: white;
+}
+
+/* End Button */
+/* Start Input */
+.custom-input {
+    outline: none;
+    width: 130px;
+    max-width: 50%;
+    font-size: 16px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--norm);
+    color: var(--dark);
+    background-color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.custom-input:focus::placeholder {
+    color: transparent;
+    transition: .3s;
+}
+
+.table-warper::-webkit-scrollbar {
+    position: absolute;
+    display: none;
+    top: 10px
+}
+
+/* End  Input  */
+/* End Component Styling */
+
+.top {
+    margin: 30px auto;
     width: fit-content;
-    margin: 30px auto 0;
+    position: relative;
+}
+
+/* Start Table */
+.table-warper {
+    position: relative;
+    max-height: 55vh;
+    width: fit-content;
     overflow: auto;
     border-radius: 20px 20px 0 0;
     border-bottom: 1.3px solid var(--dark);
     box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.237);
 }
-
-.students::after {
+.table-warper::after {
     content: '';
     display: block;
     position: sticky;
@@ -105,7 +225,129 @@ table tr.active {
     }
 
 }
+/* end table */
+/* Start tools */
+.top .tools {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 10px;
+    right: 0;
+    transform: translateX(100%);
+    padding-left: 10px;
+    gap: 10px;
+}
 
+.top .tools .btn {
+    width: 50px;
+    height: 50px;
+    max-width: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+
+}
+
+@media (min-width:992px) {
+
+    .top .tools .btn::after {
+        content: '';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 0;
+        height: 24px;
+        border-radius: 0 10px 10px 0;
+        position: absolute;
+        background-color: var(--dark);
+        color: transparent;
+        overflow: hidden;
+        top: 50%;
+        transform: translate(95%, -50%);
+        right: 0px;
+        z-index: -1;
+        transition: .4s .2s, color .1s .4s;
+    }
+
+    .top .tools .btn:hover::after {
+        content: attr(title);
+        color: var(--light);
+        width: 160px;
+    }
+
+}
+/* End tools */
+/* Start popup */
+.popup{
+    position: absolute;
+    z-index: 30;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.249);
+    transition: 1s;
+
+}
+.popup .hide{
+    display: none;
+}
+.popup form{
+    padding: 20px;
+    min-width: 300px;
+    padding-top: 40px;
+}
+.popup form .icon{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    top:-35px ;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid var(--norm);
+    border-radius: 50%;
+    background-color: var(--light);
+    color: var(--dark);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.428);
+    font-size: 30px;
+}
+.popup form h4{
+    position: relative;
+    margin: 0;
+    transform: unset;
+    text-align: center;
+    margin-bottom: 20px ;
+}
+.popup form .description{
+    text-align: center;
+}
+.popup form .row:nth-child(9){
+    margin-bottom: 0;
+}
+.popup .close-popup{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    transform: translate(50%,-50%);
+    font-size: 15px;
+    padding: 5px 8px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    background-color: var(--dark);
+    box-shadow: 2px 2px 8px black;
+    color: white;
+}
+/* End popup  */
+/* start widgets */
 .forms {
     display: flex;
     justify-content: space-around;
@@ -115,10 +357,10 @@ table tr.active {
 
 }
 
-.forms form {
+form {
     background-color: var(--light);
     flex-basis: 30%;
-    max-width: 350px;
+    max-width: 360px;
     padding: 20px;
     position: relative;
     border-radius: 17px;
@@ -131,7 +373,7 @@ table tr.active {
 
 }
 
-.forms form h4 {
+form h4 {
     margin: 0;
     position: absolute;
     top: 0;
@@ -140,26 +382,28 @@ table tr.active {
     font-size: 20px;
 }
 
-.forms form .description {
+form .description {
     margin-bottom: 20px;
     font-size: 16px;
     line-height: 1.5;
 }
 
 
-.forms form .row {
+form .row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.forms form .row.center{
+
+form .row.center {
     justify-content: space-around;
 }
-.forms form .row.right{
+
+form .row.right {
     justify-content: flex-end;
 }
 
-.forms form .row:last-child {
+form .row:last-child {
     margin-bottom: 0;
 }
 
@@ -207,113 +451,4 @@ table tr.active {
     transform: translateY(-30%) rotate(90deg);
     left: 5px;
     color: var(--dark-1);
-}
-
-/*  component styling */
-/* Start Select */
-.custom-select {
-    position: relative;
-}
-
-.custom-select select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 130px;
-    outline: none;
-    padding: 6px 10px;
-    border: 1px solid var(--norm);
-    color: var(--dark);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    background-color: white;
-    transition: .3s;
-
-}
-
-.custom-select select:hover {
-    background-color: var(--dark);
-    color: white;
-}
-
-.custom-select::after {
-    content: '\f0d7';
-    font-family: 'font awesome 6 free';
-    font-weight: bold;
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 8%;
-    transform: translateY(-50%);
-    /* to allow clicking thorgh it to the select */
-    pointer-events: none;
-    color: var(--dark);
-}
-
-.custom-select ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 16px;
-    overflow: hidden;
-    border: 1px solid var(--norm);
-}
-
-.custom-select ul li {
-    padding: 8px;
-    cursor: pointer;
-    background-color: white;
-    color: var(--dark);
-    transition: .3s;
-}
-
-.custom-select ul li:hover {
-    padding-left: 12px;
-    background-color: var(--dark);
-    color: white;
-}
-
-/* End Select */
-/* Start Button */
-.btn {
-    width: 130px;
-    max-width: 50%;
-    font-size: 16px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid var(--norm);
-    color: var(--dark);
-    background-color: white;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.btn:hover {
-    background-color: var(--dark);
-    color: white;
-}
-
-/* End Button */
-/* Start Input */
-.number-input{
-    outline: none;
-    width: 130px;
-    max-width: 50%;
-    font-size: 16px;
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid var(--norm);
-    color: var(--dark);
-    background-color: white;
-    cursor: pointer;
-    transition: .3s;
-}
-.number-input:focus::placeholder{
-    color: transparent;
-    transition: .3s;
 }
