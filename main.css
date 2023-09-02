@@ -294,13 +294,16 @@ table tr.active {
     transition: 1s;
 
 }
-.popup .hide{
-    display: none;
-}
+
 .popup form{
     padding: 20px;
     min-width: 300px;
     padding-top: 40px;
+    transform: translateY(-10%)  scale(.7) ;
+    transition: .3s ;
+}
+.popup form.show{
+    transform: translateY(0) scale(1) ;
 }
 .popup form .icon{
     position: absolute;

@@ -1,4 +1,4 @@
-const table=document.querySelector('table')
+const table = document.querySelector('table')
 
 let students = []
 
@@ -52,8 +52,10 @@ const slctparents = document.querySelectorAll('.custom-select');
 
   })
 });
+
 // end custom select
 //start popup
+
 const popup = document.querySelector('.popup')
 const openPopupBtn = document.querySelector('.open-popup')
 const closePopupBtn = document.querySelector('.close-popup')
@@ -63,30 +65,37 @@ popup.remove()
 
 openPopupBtn.addEventListener('click', (e) => {
   e.stopPropagation()
-  popup.classList.remove('hide')
   document.body.append(popup)
-
+  setTimeout(() => {
+    insertStudentForm.classList.add('show')
+  }, 0);
   document.querySelector('.popup .row input').focus()
-
   document.addEventListener('click', (e) => {
     if (!insertStudentForm.contains(e.target)) {
-      popup.classList.add('hide')
+      insertStudentForm.classList.remove('show')
       popup.remove()
       insertStudentForm.querySelectorAll('.custom-input').forEach((input) => input.value = '')
     }
   })
 })
+
 closePopupBtn.addEventListener('click', (e) => {
-  insertStudentForm.querySelectorAll('.custom-input').forEach((input) => input.value = '')
-  popup.classList.add('hide')
+  insertStudentForm.reset()
+  insertStudentForm.classList.remove('show')
   popup.remove()
 })
+
 insertStudentForm.addEventListener('submit', function (e) {
   e.preventDefault();
-  const [name , number , age ,math,since ,history] = [...document.querySelectorAll('.popup .row input')]
-  // edit insertStudent() to add dirictly to table 
-  insertStudent(name.value,+number.value,+age.value,+math.value,+since.value,+history.value)
-  popup.remove()
+  const [name, number, age, math, since, history] = [...document.querySelectorAll('.popup .row input')]
+  const result = insertStudent(name.value, +number.value, +age.value, +math.value, +since.value, +history.value)
+  if (result.hasInserted) {
+    insertStudentForm.reset()
+    popup.remove()
+    return
+  }
+  window.alert(result.errMessage)
+
 })
 
 // End Popup 
@@ -94,27 +103,22 @@ insertStudentForm.addEventListener('submit', function (e) {
 
 function insertStudent(name = '', number = 0, age, math = 0, since = 0, history = 0) {
   //  vlaidation 
-  if (typeof name !== typeof '') {
-    console.error(`Name '${name}' :Is Not a String, Name Must Be String Value `)
-    return
-  }
-  if (!checkRange(18, 40, age)) {
-    console.error(`insertStudent : ${age} Is Not Valid Age , Age Must Be Between 18 and 40`)
-    return
-  }
-  if (!(checkRange(0, 100, math) && checkRange(0, 100, since) && checkRange(0, 100, history))) {
-    console.error('insertStudent : Student Marks(History,Math,Since) Must Be Between 0-100 ')
-    return
-  }
+  if (typeof name !== typeof '')
+    return { hasInserted: false, errMessage: `Name '${name}' :Is Not a String, Name Must Be String Value ` }
+
+  if (!checkRange(18, 40, age))
+    return { hasInserted: false, errMessage: `insertStudent : ${age} Is Not Valid Age, Age Must Be Between 18 and 40` }
+
+  if (!(checkRange(0, 100, math) && checkRange(0, 100, since) && checkRange(0, 100, history)))
+    return { hasInserted: false, errMessage: 'insertStudent : Student Marks (History, Math, Since) Must Be Between 0-100 ' }
+
   if (Number.isInteger(number)) {
     if (students.some((el) => el.number == number)) {
-      console.error(`insertStudent : ${number} :Is Already Exist Chose Another Number`)
-      return
+      return { hasInserted: false, errMessage: `insertStudent :The Number (${number}) Is Already Exist Chose Another Number` }
     }
   }
   else {
-    console.error(`insertStudent : ${number} Number Must Be Integer Value : 1,2,3....`)
-    return
+    return { hasInserted: false, errMessage: `insertStudent : ${number} Number Must Be Integer Value 1,2,3....` }
   }
 
   // name format 
@@ -131,6 +135,7 @@ function insertStudent(name = '', number = 0, age, math = 0, since = 0, history 
   // 2- (better) find the proper index to insert O(n)
 
   // 2.1 (short code & much processing) using filter not best practice because at least it will go through students list 2 times first one from filter and sec from indexOf
+  // this method could giv an error when the array is empty => indexOf => -1
   let index = students.indexOf(students.filter((student) => student.name > name ? true : false)[0])
 
   // 2.2 (longer code & less processing ) using while loop is best practice(i found) becaouse we'll go thorgh list one time => O(n)
@@ -138,9 +143,15 @@ function insertStudent(name = '', number = 0, age, math = 0, since = 0, history 
   while (index2 < students.length && students[index2].name < name) index2++
   // 2.3 using array method findIndex 
   // let index3=students.findIndex((el)=>el.name>name)
-
-  students = students.slice(0, index2).concat(new student(name, number, age, math, since, history), students.slice(index2))
-
+  const newStudent = [name, number, age, math, since, history]
+  students = students.slice(0, index2).concat(new student(...newStudent), students.slice(index2))
+  const targetTr = document.querySelector(`table tbody tr:nth-child(${index2 + 1})`)
+  const newTr = targetTr.cloneNode(true);
+  [...newTr.children].forEach((td, i) => {
+    td.textContent = newStudent[i]
+  })
+  targetTr.after(newTr)
+  return { hasInserted: true, errMessage: '' }
 }
 
 function calcAvg(subject = '') {
@@ -167,7 +178,6 @@ function calcMax(subject = '') {
     return
   }
   let maxMark = Math.max(...students.map((stu) => stu[`${subject}`]))
-  // this solution dose not work if the max mark duplicated 
   let maxStudents = students.filter((el) => el[`${subject}`] == maxMark)
   maxStudents.forEach((student) => console.log(`%c${student.name}%c has the max mark of ${subject} : %c${[`${maxMark}`]} `, 'color:rgb(255,100,100);font-size:16px;text-transform:capitalize;', 'text-transform:capitalize;', 'color:rgb(100,255,100)'))
 }
@@ -192,21 +202,21 @@ function checkRange(start = 0, end = 0, num) {
   if (num >= start && num <= end) return true
   return false
 }
-// insertStudent('ahmed', 1, 19, 59, 50, 50)
-// insertStudent('zyaD', 3, 24, 49, 82, 80)
-// insertStudent('bAkr', 2, 22, 59, 60, 61)
-// insertStudent('othman', 5, 28, 89, 50, 80)
+insertStudent('alia', 1000, 19, 59, 50, 50)
+insertStudent('zyaD', 3, 24, 49, 82, 80)
+insertStudent('bAkr', 2, 22, 59, 60, 61)
+insertStudent('othman', 5, 28, 89, 50, 80)
 // insertStudent('BeLal', 4, 25, 56, 50, 57)
 // insertStudent('Ameer', 6, 21, 76, 40, 90)
 // insertStudent('ameR', 20, 21, 65, 74, 62)
 // insertStudent('Yazeed', 19, 19, 59, 82, 70)
-// console.table(students)
-// calcAvg('MatH')
+console.table(students)
+calcAvg('MatH')
 // calcAvg('history')
 // calcAvg('sincE')
 // calcMax('since')
 // calcMax('math')
-// calcMax('history')
+calcMax('history')
 // checkSuccess(19)
 // checkSuccess(3)
 // // validation tests
