@@ -17,6 +17,7 @@ Simple HTML/CSS /JS single page app contain basics of JavaScript data manipulati
    - calcMax('subject')
    - chechkSuccess(stud.num)
 ## Final design :
+click [here](https://mohammed-nayef.github.io/functional-table/) to see the final result
 - page design
  
 ![web page img](page.png)
