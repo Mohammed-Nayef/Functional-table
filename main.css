@@ -2,14 +2,16 @@
     --dark: #021c33;
     --dark-1: #163460;
     --norm: #32558c;
-    --light-gradiant: #d1b7ff;
+    --light-gradient: #d1b7ff;
     --light: #fffbee;
 }
 
 * {
     box-sizing: border-box;
 }
-
+html{
+    scroll-behavior: smooth;
+}
 /* Start Global Ruls */
 ::-webkit-scrollbar-thumb {
     background: #32558c;
@@ -24,11 +26,12 @@
 
 body {
     margin: 0;
-    background-image: linear-gradient(150deg, var(--light), var(--light-gradiant));
+    background-image: linear-gradient(150deg, var(--light), var(--light-gradient));
     background-repeat: no-repeat;
     background-size: contain;
     min-height: 100vh;
-    font-family: Arial;
+    font-family: 'futura std',sans-serif;
+    letter-spacing: .5px;
 }
 
 /* End Global Ruls */
@@ -40,6 +43,8 @@ body {
 }
 
 .custom-select select {
+    font-family: 'futura std',sans-serif;
+    font-weight: bold;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -91,6 +96,7 @@ body {
 .custom-select ul li {
     background-color: white;
     color: var(--dark);
+    font-weight: bold;
     padding: 8px;
     cursor: pointer;
     transition: .3s;
@@ -105,6 +111,8 @@ body {
 /* End Select */
 /* Start Button */
 .btn {
+    font-family: 'futura std',sans-serif;
+    font-weight: bold;
     width: 130px;
     max-width: 50%;
     font-size: 16px;
@@ -125,6 +133,7 @@ body {
 /* End Button */
 /* Start Input */
 .custom-input {
+    font-family: 'futura std',sans-serif;
     outline: none;
     width: 130px;
     max-width: 50%;
@@ -200,20 +209,26 @@ table tr:nth-child(even) {
 }
 
 table tr:nth-child(odd) {
-    background-color: var(--light-gradiant);
+    background-color: rgb(221, 242, 255);
 }
 
+table tr {
+    transition: .2s;
+}
+table tr.active {
+    font-weight: 600;
+    background-color: var(--norm);
+    color: white;
+}
+
+table tr.hide{
+    display: none;
+}
 table th,
 table td {
 
     padding: 10px 15px;
 }
-
-table tr.active {
-    border: 2px solid var(--norm);
-    font-weight: bold;
-}
-
 @media (max-width:768px) {
     table {
         font-size: 13px;
@@ -275,7 +290,7 @@ table tr.active {
     .top .tools .btn:hover::after {
         content: attr(title);
         color: var(--light);
-        width: 160px;
+        width: 205px;
     }
 
 }
@@ -367,22 +382,26 @@ form {
     padding: 20px;
     position: relative;
     border-radius: 17px;
-    border: 1px solid var(--light-gradiant);
+    border: 1px solid var(--light-gradient);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.134);
     margin-top: 33px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
 
 }
 
 form h4 {
     margin: 0;
     position: absolute;
+    width: 100%;
     top: 0;
+    left: 0;
     transform: translateY(-100%);
     z-index: 1;
-    font-size: 20px;
+    font-size: 25px;
+    text-align: center;
 }
 
 form .description {
