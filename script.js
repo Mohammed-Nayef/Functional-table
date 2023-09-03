@@ -105,6 +105,10 @@ insertStudentForm.addEventListener('submit', function (e) {
 //------------------------------------------------- Hide failed students ------------------------------------------
 const hideFailedStudentsBtn = document.getElementById('hide-failed')
 hideFailedStudentsBtn.addEventListener('click', (e) => {
+
+  let titleAttr=hideFailedStudentsBtn.getAttribute('title')
+  if(titleAttr.startsWith('H')) hideFailedStudentsBtn.setAttribute('title','Show failed students')
+  else hideFailedStudentsBtn.setAttribute('title','Hide failed students')
   if(students.length==0) return
   students.forEach((student, i) => {
     if (!checkSuccess(student.number).passed){
@@ -118,8 +122,9 @@ const maxStudentsForm=document.getElementById('max-students')
 const maxStudentsSelect=document.querySelector('form#max-students .custom-select select')
 maxStudentsForm.addEventListener('submit',(e)=>{
   e.preventDefault()
-  //remove old highlights & show hidden students 
-  document.querySelectorAll('table tbody tr').forEach((row)=>row.classList.remove('active','hide'))
+  //remove old highlights & show hidden students (failed)
+  document.querySelectorAll('table tbody tr').forEach((row)=>row.classList.remove('active'))
+  if(hideFailedStudentsBtn.getAttribute('title').startsWith('S')) hideFailedStudentsBtn.click()
   const indexes=calcMax(maxStudentsSelect.value)
   indexes.forEach((i)=>{
     document.querySelector(`table tbody tr:nth-child(${i+1})`).classList.add('active')
