@@ -203,7 +203,6 @@ function insertStudent(name = '', number = 0, age, math = 0, since = 0, history 
     })
     newTr.classList.remove('hide')
     targetTr.before(newTr)
-    console.log(index2,'index 2 ')
   }
   else {
     // empty table or new row order is last one
@@ -232,7 +231,6 @@ function calcAvg(subject = '') {
   for (; i < students.length; i++)
     sum += students[i][`${subject}`]
 
-  console.log(`%cAVG %cof ${subject} Marks For All Students is %c${sum / i}`, 'color:rgb(255,100,100);font-size:16px', 'text-transform:capitalize', 'color:rgb(100,255,100)')
   return sum / i
 }
 
@@ -249,7 +247,6 @@ function calcMax(subject = '') {
     if(student[`${subject}`]===maxMark)
     maxStudentsIndexes.push(i)
   })
-  console.log(maxStudentsIndexes)
   return maxStudentsIndexes
 }
 
@@ -263,10 +260,8 @@ function checkSuccess(number = -1) {
   }
   //         condition one                                                    condition two 
   if (stud.math >= 50 && stud.history >= 50 && stud.since >= 50 && (stud.math + stud.since + stud.history) / 3 >= 60) {
-    console.log(`%c${stud.name}%c Success`, 'color:rgb(250,100,100);font-size:16px;text-transform:capitalize', 'color:rgb(100,255,100)')
     return {passed:true,err:''}
   }
-  console.log(`%c${stud.name}%c Failed`, 'color:rgb(250,100,100);font-size:16px;text-transform:capitalize', 'color:rgb(255,100,100)')
   return {passed:false,err:''}
 }
 
@@ -277,10 +272,9 @@ function checkRange(start = 0, end = 0, num) {
 // ----------------------------------------------------------------------------------------------------------------
 insertStudent('ali', 1000, 19, 59, 50, 50)
 insertStudent('zyaD', 300, 24, 49, 82, 80)
-insertStudent('cat', 222, 22, 59, 60, 61)
+insertStudent('mohammed nayef', 222, 22, 59, 60, 61)
 insertStudent('belal', 333, 21, 89, 60, 87)
 insertStudent('othman', 555, 28, 89, 50, 80)
 insertStudent('Ameer', 666, 21, 76, 73, 90)
-console.table(students)
 calcAvg('MatH')
 calcMax('history')
