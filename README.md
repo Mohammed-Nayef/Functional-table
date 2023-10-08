@@ -8,7 +8,7 @@ Simple HTML/CSS /JS single page app contain basics of JavaScript data manipulati
   - Age
   - Number
   - Math
-  - Since
+  - science
   - History 
 
 2 . also we have four main fucntions :
